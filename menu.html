@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio CBTIS 205</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #f5e6cc, #fff9f0);
+      color: #800000;
+      font-family: "Georgia", "Brush Script MT", cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5vh 5vw;
+    }
+    h2 {
+      font-size: 7vw;
+      margin-bottom: 4vh;
+      text-shadow: 2px 2px #ccc;
+    }
+    .btn {
+      background-color: #800000;
+      color: #f5e6cc;
+      border: none;
+      padding: 14px 28px;
+      margin: 10px;
+      font-size: 5vw;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 400px;
+    }
+    .btn:hover {
+      background-color: #a00000;
+      transform: scale(1.05);
+    }
+    .nombre {
+      font-size: 6vw;
+      font-weight: bold;
+      margin-top: 3vh;
+      text-shadow: 1px 1px #ccc;
+    }
+    .mensaje {
+      font-size: 4.5vw;
+      margin: 2vh 0;
+    }
+    a {
+      text-decoration: none;
+    }
+    @media (min-width: 768px) {
+      h2 { font-size: 36px; }
+      .btn { font-size: 20px; }
+      .nombre { font-size: 28px; }
+      .mensaje { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <h2>Portafolio CBTIS 205</h2>
+  <button class="btn" onclick="toggleEquipo()">Trabajo en Equipo</button>
+  <button class="btn" onclick="toggleIndividual()">Trabajo Individual</button>
+
+  <div id="contenido" style="margin-top: 30px;"></div>
+
+  <script>
+    let equipoVisible = false;
+    let individualVisible = false;
+
+    function toggleEquipo() {
+      const div = document.getElementById("contenido");
+      if (equipoVisible) {
+        div.innerHTML = "";
+        equipoVisible = false;
+      } else {
+        div.innerHTML = `
+          <div class="nombre">Trabajo en equipo</div>
+          <p class="mensaje">Pulse el botón para abrir el portafolio en PDF:</p>
+          <a href="Equipo.pdf" target="_blank">
+            <button class="btn">Ver PDF</button>
+          </a>
+        `;
+        equipoVisible = true;
+        individualVisible = false;
+      }
+    }
+
+    function toggleIndividual() {
+      const div = document.getElementById("contenido");
+      if (individualVisible) {
+        div.innerHTML = "";
+        individualVisible = false;
+      } else {
+        const integrantes = [
+          "Jose Juventino Robledo Santiago",
+          "Angel Valdivieso Pineda",
+          "Aldo Vasquez Ruiz",
+          "Paris Vladimir Parada Orozco",
+          "Rosario de Jesus Jimenez Vasquez",
+          "Galilea Teran Martinez"
+        ];
+        let botones = integrantes.map((nombre, i) =>
+          `<button class="btn" onclick="mostrarIntegrante(${i + 1}, '${nombre}')">${nombre}</button>`
+        ).join("");
+        div.innerHTML = botones;
+        individualVisible = true;
+        equipoVisible = false;
+      }
+    }
+
+    function mostrarIntegrante(n, nombre) {
+      const div = document.getElementById("contenido");
+      div.innerHTML = `
+        <div class="nombre">${nombre}</div>
+        <p class="mensaje">Pulse el botón para abrir el portafolio en PDF:</p>
+        <a href="integrante${n}.pdf" target="_blank">
+          <button class="btn">Ver PDF</button>
+        </a>
+      `;
+    }
+  </script>
+</body>
+</html>
